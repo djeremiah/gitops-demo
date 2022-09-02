@@ -1,0 +1,52 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: spring-boot-greeter-argo
+  namespace: icon
+  labels:
+    app: spring-boot-greeter-argo
+    app.kubernetes.io/component: spring-boot-greeter-argo
+    app.kubernetes.io/instance: spring-boot-greeter-argo
+    app.kubernetes.io/name: spring-boot-greeter-argo
+    app.kubernetes.io/part-of: spring-boot-greeter-argo
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-11-ubi8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-greeter-argo
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-boot-greeter-argo
+        deploymentconfig: spring-boot-greeter-argo
+    spec:
+      containers:
+        - name: spring-boot-greeter-argo
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/icon/spring-boot-greeter@sha256:6dad4535b8d5fd8d0b583c60367eec7624b5f5ca62abccfe66223710591b9e63
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8778
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

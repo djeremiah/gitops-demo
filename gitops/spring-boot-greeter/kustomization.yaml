@@ -1,0 +1,2 @@
+resources:
+  - spring-boot-greeter.Deployment.yaml
