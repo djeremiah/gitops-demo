@@ -1,0 +1,23 @@
+library identifier: "pipeline-library@v1.6",
+retriever: modernSCM(
+  [
+    $class: "GitSCMSource",
+    remote: "https://github.com/redhat-cop/pipeline-library.git"
+  ]
+)
+
+pipeline {
+    agent {
+        label "maven"
+    }
+    stages {
+        stage("Checkout") {
+            steps {
+                checkout scm
+            }
+        }
+        stage("Build") {
+            binaryBuild(buildConfigName: "spring-boot-greeter", buildFromPath ".")
+        }
+    }
+}
