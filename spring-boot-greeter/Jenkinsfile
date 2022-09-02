@@ -18,8 +18,7 @@ pipeline {
         }
         stage("Build") {
             steps {
-                binaryBuild(buildConfigName: "spring-boot-greeter", buildFromPath: "spring-boot-greeter")
-                      
+                binaryBuild(buildConfigName: "spring-boot-greeter", buildFromPath: ".")
             }
         }
     }
