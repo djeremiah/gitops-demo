@@ -1,5 +1,4 @@
 resources:
   - apps/00-root.Application.yaml
   - apps/environment.Application.yaml
-  - apps/spring-boot-greeter.Application.yaml
 
