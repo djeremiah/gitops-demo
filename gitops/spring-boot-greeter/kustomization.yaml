@@ -1,0 +1,3 @@
+resources:
+  - icon.Namespace.yaml
+  - argo-admin.RoleBinding.yaml
