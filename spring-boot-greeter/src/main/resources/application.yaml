@@ -1,3 +1,5 @@
-greeter:
-  prefix: Hi
-
+spring:
+  cloud:
+    kubernetes:
+      config:
+        name: spring-config
